@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from 'src/app/model/Project';
 import { Task } from 'src/app/model/Task';
 import { ApiService } from 'src/app/services/api.service';
@@ -14,15 +14,31 @@ import { environment } from 'src/environments/environment';
 })
 export class ProjectComponent implements OnInit {
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute
+    ,private router: Router) { }
 
   projects? : Project[];
   selectedProject? : Project;
   
   ngOnInit(): void {
     this.getProjectsList();
+    this.routeListner();
   }
 
+
+  // realized a little late that I was supposed to use query params instead of path.
+  // Just a quick fix, even though its not the best solution.
+  routeListner(){
+    this.route.queryParams
+    .subscribe(params => {
+      if(params['user']){
+        // this.router.navigate(['user/' + params['user']]);
+        this.router.navigateByUrl('user/' + params['user'], { skipLocationChange: true });
+
+      }
+    }
+  );
+  }
   
   // get all projects
   getProjectsList() {
