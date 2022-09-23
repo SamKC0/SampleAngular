@@ -1,0 +1,43 @@
+
+
+
+<div class='wrapper text-center'> <!-- to center -->
+    <h3>Please select a project to view</h3>
+
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+<div *ngFor="let p of projects; let i = index;">
+<button type="button"
+(click)="selectProject(p.project_name)">{{p.project_name}}</button>
+</div>
+
+</div>
+</div>
+
+
+<div *ngIf="selectedProject">
+
+    <div class='wrapper text-center'> <!-- to center -->
+
+    <table class="table">
+        <thead>
+        <tr>
+          <th>Task</th>
+          <th>Assigned to</th>
+          <th>Estimated Hours</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let t of selectedProject.task; let i = index;">
+            <th>{{t.task_name}}</th>
+            <th>
+            <span *ngFor="let n of t.member">{{ n.member_name + " "}}</span>
+            </th>
+            <th>{{t.task_hours}}</th>
+
+        </tr>
+    </tbody>
+    </table>
+</div>
+</div>
+

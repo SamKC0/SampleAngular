@@ -1,0 +1,30 @@
+
+  <div class='wrapper text-center'> <!-- to center -->
+
+<h2> User Details</h2>
+
+
+<div *ngIf="projects">
+
+
+  <table class="table">
+    <thead>
+     <tr>
+          <th>Project</th>
+          <th>Members</th>
+          <th>Estimated Hours</th>
+          <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of projectLists; let i = index;">
+          <th>{{p.project_name}}</th>
+          <th>{{p.member}}</th>
+          <th>{{p.estimated_hours}}</th>
+
+          </tr>
+        </tbody>
+          </table>
+      
+</div>
+</div>
